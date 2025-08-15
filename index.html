@@ -3,12 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Music</title>
+    <title>Background Music Safe Version</title>
 </head>
 <body>
-    <audio autoplay loop>
+    <h1>My Website with Safe Background Music</h1>
+
+    <audio id="bgMusic" autoplay loop>
         <source src="https://raw.githubusercontent.com/abhinabbbbb/music/main/Blue.mp3" type="audio/mpeg">
     </audio>
-    <h1>My Website with Background Music</h1>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+
+        // Agar RAW link fail ho to backup link lagao
+        audio.onerror = function () {
+            console.warn("Primary RAW link failed, switching to backup...");
+            audio.src = "https://abhinabbbbb.github.io/music/Blue.mp3";
+            audio.play().catch(err => console.error("Backup link autoplay blocked:", err));
+        };
+    </script>
 </body>
 </html>
